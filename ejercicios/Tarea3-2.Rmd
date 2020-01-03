@@ -1,0 +1,136 @@
+---
+title: "Ejercicios sobre LaTeX, R y Markdown"
+author: "MIGGC"
+date: "3/1/2020"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Preguntas
+
+## Pregunta 1
+
+Realizad los siguientes productos de matrices en `R` donde:
+
+$$A = \begin{pmatrix}
+1 & 2 & 3 & 4\\
+4 & 3 & 2 & 1\\
+0 & 1 & 0 & 2\\ 
+3 & 0 & 4 & 0
+\end{pmatrix}
+\qquad 
+B= \begin{pmatrix}
+4 & 3 & 2 & 1\\ 
+0 & 3 & 0 & 4\\ 
+1 & 2 & 3 & 4\\ 
+0 & 1 & 0 & 2
+\end{pmatrix}$$
+
+```{r}
+A = matrix(c(1, 2, 3, 4, 4, 3, 2, 1, 0, 1, 0, 2, 3, 0, 4, 0), nrow = 4, byrow = TRUE)
+B = matrix(c(4, 3, 2, 1, 0, 3, 0, 4, 1, 2, 3, 4, 0, 1, 0, 2), nrow = 4, byrow = TRUE)
+```
+
+1. $A \cdot B$
+
+```{r}
+print(A%*%B)
+```
+
+$$A \cdot B = \begin{pmatrix}
+7 & 19 & 11 & 29\\ 
+18 & 26 & 14 & 26\\ 
+0 & 5 & 0 & 8\\ 
+16 & 17 & 18 & 19
+\end{pmatrix}$$
+
+2. $B \cdot A$
+
+```{r}
+print(B%*%A)
+```
+
+$$B \cdot A = \begin{pmatrix}
+19 & 19 & 22 & 23\\ 
+24 & 9 & 22 & 3\\ 
+21 & 11 & 23 & 12\\ 
+10 & 3 & 10 & 1
+\end{pmatrix}$$
+
+3. $\left(A \cdot B\right)^t$
+
+```{r}
+t(A%*%B)
+```
+
+4. $B^t\cdot A$
+
+```{r}
+t(B)%*%A
+```
+5. $\left(A\cdot B\right)^{-1}$
+
+```{r}
+solve(A%*%B)
+```
+
+6. $A^{-1}\cdot B^t$
+
+```{r}
+round(solve(A)%*%t(B),1)
+```
+
+## Pregunta 2
+
+Considerad en un vector los números de vuestro DNI y llamadlo `dni`. Por ejemplo, si vuestro DNI es 54201567K, vuestro vector será
+
+$$dni = (5, 4, 2, 0, 1, 5, 6, 7)$$
+
+Definid el vector en `R`. Calculad con `R` el vector `dni` al cuadrado, la raíz cuadrada del vector `dni` y, por último,
+la suma de todas las cifras del vector `dni`.
+
+Finalmente, escribid todos estos vectores también a \LaTeX\
+
+```{r}
+dni = c(4, 7, 0, 4, 5, 2, 7, 6)
+dni^2
+sqrt(dni)
+sum(dni)
+```
+
+* $dni^2 = \left(16, 49, 0, 16, 25, 4, 49, 36\right)$
+* $\sqrt{dni} = \left(2, 2.6, 0, 2, 2.2, 1.4, 2.6, 2.4\right)$
+* $\sum dni = 35$
+
+## Pregunta 3
+
+Considerad el vector de las letras de vuestro nombre y apellido. Llamadlo name. Por ejemplo, en mi caso sería
+
+$$nombre = (M, A, R, I, A, S, A, N, T, O, S)$$
+
+Definid dicho vector en `R`. Calculad el subvector que solo contenga vuestro nombre. Calculad también el subvector que contenga solo vuestro apellido. Ordenadlo alfabéticamente. Cread una matriz con este vector.
+
+Redactad todos vuestros resultados y utilizad \LaTeX\ cuando pertoque
+
+```{r}
+nombre = c('I', 'S', 'A', 'B', 'E', 'L', 'G', 'O', 'N', 'Z', 'A', 'L', 'E', 'Z')
+nombrePila = nombre[1:6]
+nombrePila
+apellido = nombre[-c(1:6)]
+apellido
+sort(apellido)
+matrix(apellido, nrow= 1)
+```
+
+* Subvector con el nombre: $\left(I, S, A, B, E, L\right)$
+* Subvector con el apellido: $\left(G, O, N, Z, A, L, E, Z\right)$
+* Subvector con el apellido ordenado: $\left(A, E, G, L, N, O, Z, Z\right)$
+* Matriz con el apellido:$\begin{pmatrix}G&O&N&Z&A&L&E&Z\end{pmatrix}$
+
+
+
